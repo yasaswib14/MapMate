@@ -1,0 +1,146 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #f0f0f0;
+  line-height: 1.6;
+}
+
+/* Main container */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #1e1e2f;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 30px;
+}
+
+/* Header */
+h1 {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 2.5rem;
+  color: #00bcd4;
+  margin-bottom: 10px;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+input, select, button {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background-color: #2a2a3d;
+  color: #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+  border-color: #00bcd4;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
+}
+
+button {
+  background: #00bcd4;
+  color: #1e1e2f;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #0097a7;
+  transform: scale(1.05);
+}
+
+#myLocationBtn {
+  background: #4caf50;
+  margin-top: 10px;
+  color: #fff;
+}
+
+#myLocationBtn:hover {
+  background: #388e3c;
+}
+
+/* Results section */
+.left-section {
+  grid-column: 1 / 2;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 1.8rem;
+  color: #00bcd4;
+  border-bottom: 2px solid #00bcd4;
+  padding-bottom: 8px;
+}
+
+#resultsList {
+  list-style: none;
+  padding: 0;
+}
+
+#resultsList li {
+  background: #2a2a3d;
+  margin: 10px 0;
+  padding: 14px 18px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+#resultsList li:hover {
+  transform: translateY(-2px);
+  background: #37475a;
+}
+
+/* Map section */
+.right-section {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  align-self: start;
+}
+
+#map {
+  height: 300px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+/* Responsive layout */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .right-section {
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+  }
+
+  #map {
+    height: 250px;
+  }
+}
