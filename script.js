@@ -118,12 +118,21 @@ out;
 
     const markersGroup = L.featureGroup();
 
+    // Collect valid places with distance
+    const placesWithDistance = [];
     data.elements.forEach((place) => {
         const name = place.tags && place.tags.name ? place.tags.name.trim() : "";
         if (!name || name.toLowerCase() === "unnamed") return;
 
         const dist = getDistance(lat, lon, place.lat, place.lon);
+        placesWithDistance.push({ place, name, dist });
+    });
 
+    // Sort by distance
+    placesWithDistance.sort((a, b) => a.dist - b.dist);
+
+    // Render sorted list
+    placesWithDistance.forEach(({ place, name, dist }) => {
         const item = document.createElement("li");
         item.textContent = `${name} – ${dist.toFixed(2)} km away`;
         resultsList.appendChild(item);
