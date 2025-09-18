@@ -9,40 +9,36 @@
 </head>
 <body>
   <div class="container">
-    
-    <!-- Page Title -->
     <h1>Nearby Places Finder</h1>
-
-    <!-- Left Section: Form and Results -->
-    <div class="left-section">
-      <form id="searchForm">
-        <input type="text" id="placeInput" placeholder="Enter a location (e.g., Coimbatore)" />
-        <select id="categorySelect">
-          <option value="restaurant">Restaurant</option>
-          <option value="cafe">Cafe</option>
-          <option value="hospital">Hospital</option>
-          <option value="school">School</option>
-          <option value="bank">Bank</option>
-          <option value="atm">ATM</option>
-          <option value="fuel">Fuel / Petrol Pump</option>
-          <option value="park">Park</option>
-        </select>
-        <button type="submit">Search</button>
-      </form>
-
-      <button id="myLocationBtn">📍 Use My Location</button>
-
-      <h2>Results:</h2>
-      <ul id="resultsList"></ul>
+    <div class="main-content">
+      <!-- Left Section: Form and Results -->
+      <div class="left-section card">
+        <form id="searchForm">
+          <input type="text" id="placeInput" placeholder="Enter a location (e.g., Coimbatore)" />
+          <select id="categorySelect">
+            <option value="restaurant">Restaurant</option>
+            <option value="cafe">Cafe</option>
+            <option value="hospital">Hospital</option>
+            <option value="school">School</option>
+            <option value="bank">Bank</option>
+            <option value="atm">ATM</option>
+            <option value="fuel">Fuel / Petrol Pump</option>
+            <option value="park">Park</option>
+          </select>
+          <button type="submit" class="primary-btn">Search</button>
+        </form>
+        <button id="myLocationBtn" class="secondary-btn">📍 Use My Location</button>
+        <div class="results-panel">
+          <h2>Results:</h2>
+          <ul id="resultsList"></ul>
+        </div>
+      </div>
+      <!-- Right Section: Map -->
+      <div class="right-section card">
+        <div id="map"></div>
+      </div>
     </div>
-
-    <!-- Right Section: Map -->
-    <div class="right-section">
-      <div id="map"></div>
-    </div>
-
   </div>
-
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>

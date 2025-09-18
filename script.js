@@ -15,7 +15,11 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
   resultsList.innerHTML = "Loading...";
 
-  const place = document.getElementById("placeInput").value.trim();
+  // Clear any previous "my location" popup
+  if (userMarker) userMarker.closePopup();
+
+  const placeInput = document.getElementById("placeInput");
+  const place = placeInput.value.trim();
   const category = document.getElementById("categorySelect").value;
   if (!place) {
     alert("Please enter a place!");
@@ -38,14 +42,17 @@ form.addEventListener("submit", async (e) => {
   if (userMarker) map.removeLayer(userMarker);
   userMarker = L.marker([lat, lon]).addTo(map).bindPopup(`📍 ${place}`).openPopup();
 
-  // Fetch nearby places for that searched location
-  fetchNearby(lat, lon, category);
+  await fetchNearby(lat, lon, category);
 });
 
 // ------------------ SEARCH BY MY LOCATION ------------------
 myLocationBtn.addEventListener("click", () => {
   resultsList.innerHTML = "Fetching your location...";
-  navigator.geolocation.getCurrentPosition((pos) => {
+
+  // Clear the search input
+  document.getElementById("placeInput").value = "";
+
+  navigator.geolocation.getCurrentPosition(async (pos) => {
     const { latitude, longitude } = pos.coords;
     map.setView([latitude, longitude], 14);
 
@@ -53,7 +60,7 @@ myLocationBtn.addEventListener("click", () => {
     userMarker = L.marker([latitude, longitude]).addTo(map).bindPopup("📍 You are here").openPopup();
 
     const category = document.getElementById("categorySelect").value;
-    fetchNearby(latitude, longitude, category);
+    await fetchNearby(latitude, longitude, category);
   }, (err) => {
     alert("Location access denied!");
   });
@@ -88,17 +95,30 @@ async function fetchNearby(lat, lon, category) {
     }
   });
 
-  data.elements.forEach((place) => {
-    const name = place.tags && place.tags.name ? place.tags.name : "Unnamed";
+  // Store markers for reference
+  const markers = [];
+
+  data.elements.forEach((place, idx) => {
+    const name = place.tags && place.tags.name ? place.tags.name.trim() : "";
+    if (!name || name.toLowerCase() === "unnamed") return; // Skip unknown names
+
     const dist = getDistance(lat, lon, place.lat, place.lon);
 
     const item = document.createElement("li");
     item.textContent = `${name} – ${dist.toFixed(2)} km away`;
     resultsList.appendChild(item);
 
-    L.marker([place.lat, place.lon])
+    // Create marker and store reference
+    const marker = L.marker([place.lat, place.lon])
       .addTo(map)
       .bindPopup(`<b>${name}</b><br>${dist.toFixed(2)} km away`);
+    markers.push(marker);
+
+    // Add click event to list item
+    item.addEventListener("click", () => {
+      map.setView([place.lat, place.lon], 16);
+      marker.openPopup();
+    });
   });
 }
 
