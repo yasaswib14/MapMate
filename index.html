@@ -1,45 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nearby Places Finder</title>
+  <title>Map Mate</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Nearby Places Finder</h1>
+    <h1>🌍 Map Mate</h1>
     <div class="main-content">
-      <!-- Left Section: Form and Results -->
+      <!-- Left Section -->
       <div class="left-section card">
         <form id="searchForm">
-          <input type="text" id="placeInput" placeholder="Enter a location (e.g., Coimbatore)" />
+          <input type="text" id="placeInput" placeholder="🔍 Enter a location (e.g., Coimbatore)" />
           <select id="categorySelect">
-            <option value="restaurant">Restaurant</option>
-            <option value="cafe">Cafe</option>
-            <option value="hospital">Hospital</option>
-            <option value="school">School</option>
-            <option value="bank">Bank</option>
-            <option value="atm">ATM</option>
-            <option value="fuel">Fuel / Petrol Pump</option>
-            <option value="park">Park</option>
+            <option value="restaurant">🍴 Restaurant</option>
+            <option value="hospital">🏥 Hospital</option>
+            <option value="school">🏫 School</option>
+            <option value="bank">🏦 Bank</option>
+            <option value="atm">🏧 ATM</option>
+            <option value="fuel">⛽ Fuel / Petrol Pump</option>
           </select>
-          <button type="submit" class="primary-btn">Search</button>
+          <button type="submit" class="primary-btn" id="searchBtn">🔍 Search</button>
         </form>
         <button id="myLocationBtn" class="secondary-btn">📍 Use My Location</button>
+
         <div class="results-panel">
           <h2>Results:</h2>
           <ul id="resultsList"></ul>
         </div>
       </div>
-      <!-- Right Section: Map -->
+
+      <!-- Right Section -->
       <div class="right-section card">
         <div id="map"></div>
       </div>
     </div>
   </div>
+
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
+
+
