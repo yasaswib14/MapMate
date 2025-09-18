@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Map Mate</title>
-  <title>Map Mate</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body>
   <div class="container">
@@ -16,7 +15,13 @@
       <!-- Left Section -->
       <div class="left-section card">
         <form id="searchForm">
-          <input type="text" id="placeInput" placeholder="🔍 Enter a location (e.g., Coimbatore)" />
+          <div class="input-group pretty-location">
+            <input type="text" id="placeInput" placeholder="Enter a location (e.g., Coimbatore)" />
+            <button type="button" id="myLocationBtn" class="location-btn-pretty" title="Use My Location">
+              <span class="material-symbols-outlined">my_location</span>
+              <span class="location-tooltip">Use My Location</span>
+            </button>
+          </div>
           <select id="categorySelect">
             <option value="restaurant">🍴 Restaurant</option>
             <option value="hospital">🏥 Hospital</option>
@@ -27,7 +32,6 @@
           </select>
           <button type="submit" class="primary-btn" id="searchBtn">🔍 Search</button>
         </form>
-        <button id="myLocationBtn" class="secondary-btn">📍 Use My Location</button>
 
         <div class="results-panel">
           <h2>Results:</h2>
